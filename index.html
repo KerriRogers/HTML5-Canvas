@@ -1,0 +1,80 @@
+<!DOCTYPE  html>
+
+<html>
+	<head>
+		<title>Game</title>
+		<style>
+	body {background-color: #707070}
+	#myCanvas1 {border:2px solid; border-bottom-right-radius:20px; border-bottom-left-radius:20px; background-color: #707070;}
+	
+
+	h3{ color: white;}
+		</style>
+	</head>
+
+<body onload="drawCanvas1();">
+    <div id="grave">
+		<img src='img/grave.jpg' width="850">
+        <canvas id="myCanvas1" width="850" height="70" >
+            <p>Your browser doesn't support canvas.</p>
+        </canvas>
+    </div>
+    
+        
+<script>
+
+var surface;
+var happy;
+var x = 50;
+var y = 0;
+var dirX = 1;
+var dirY = 1;
+
+function drawCanvas1() {
+	    // Get Canvas element
+    surface = document.getElementById("myCanvas1");
+    
+    if (surface.getContext) {
+        // load the image
+        happy = new Image();
+        happy.onload = loadingComplete;
+        happy.src = "img/smzombie.jpg";
+	}
+}
+
+function loadingComplete(e) {
+    // When the image has loaded begin the loop
+    setInterval(loop, 150);
+}
+
+function loop() {
+    // Each loop move image by changing its x/y position
+    
+    // Get the context -
+    var surfaceContext = surface.getContext('2d');
+
+    // Clear the canvas -
+    surfaceContext.fillStyle = "rgb(255,255,255)";
+    surfaceContext.fillRect(0, 0, surface.width, surface.height);
+    
+    // Draw the image -
+    surfaceContext.drawImage(happy, x, y);
+
+    x += dirX;
+    y += dirY;
+
+    if (x <= 0 || x > 650 - 23) {
+        dirX = -dirX;
+    }
+    if (y <= 0 || y > 50 - 23) {
+        dirY = -dirY;
+    }
+}
+
+
+
+</script>
+<h3>It's not whether you win or lose, it's how you play the game!</h3>
+
+</body>
+</html>
